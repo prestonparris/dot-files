@@ -38,10 +38,6 @@ set notimeout
 set autowrite
 set autoread
 
-" Powerline
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_theme = 'pwrtylr'
-
 " Statusline
 set laststatus=2
 
