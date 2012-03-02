@@ -23,7 +23,7 @@ function(errors, window) {
     var title = window.$(this).find("a").text()
       , href = window.$(this).find("a").attr("href")
 
-    if(title != "" && href != "undefind"){
+    if(title){
       stories.push({
         title: title,
         href: href
