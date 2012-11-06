@@ -1,5 +1,3 @@
-" Vim Awesomesauce
-
 " Vundle
     " Setting up Vundle - the vim plugin bundler
         let iCanHazVundle=1
@@ -211,8 +209,10 @@
 
 " Vim Plugin Configs
     "set t_Co=256
-    colorscheme molokai
+    colorscheme molokai 
     set background=dark
+
+    let g:Powerline_symbols = 'fancy'
 
     if has('statusline')
     	set laststatus=2
@@ -236,6 +236,13 @@
     "let g:ropevim_guess_project=1
     let g:pymode_folding=0
     let g:pymode_lint_ignore=""
+
+    set visualbell t_vb=
+
+    noremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
 
 " Vim Plugin Configs end
 
