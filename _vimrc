@@ -1,5 +1,7 @@
 " Vundle
+
     " Setting up Vundle - the vim plugin bundler
+    
         let iCanHazVundle=1
         let vundle_readme=expand("~/.vim/bundle/vundle/README.md")
         if !filereadable(vundle_readme) 
@@ -14,6 +16,8 @@
         call vundle#rc()
         Bundle 'gmarik/vundle'
     " Setting up Vundle - the vim plugin bundler end
+    
+    set showcmd
 
     " Bundles
         " General Vim
@@ -21,9 +25,26 @@
             Bundle 'Lokaltog/vim-powerline'
             Bundle 'tomasr/molokai'
             Bundle 'scrooloose/nerdtree'
-            Bundle 'https://github.com/tpope/vim-fugitive.git'
-            Bundle 'Command-T'
+            Bundle 'tpope/vim-fugitive.git'
+            Bundle 'tpope/vim-foreplay.git'
+            "Bundle 'marijnh/tern_for_vim'
+            Bundle 'tpope/vim-classpath.git'
+            Bundle 'guns/vim-clojure-static.git'
+            Bundle 'ktvoelker/sbt-vim'
+            Bundle 'Shougo/neocomplcache.vim'
+            Bundle "megaannum/self"
+            Bundle "derekwyatt/vim-scala"
+            Bundle "megaannum/forms" 
+            Bundle "Shougo/vimproc"
+            Bundle "Shougo/vimshell"
+            Bundle "aemoncannon/ensime"
+            Bundle "megaannum/vimside" 
+            Bundle 'majutsushi/tagbar'
+            Bundle 'skammer/vim-css-color'
+            Bundle 'kien/ctrlp.vim'
             Bundle 'loremipsum'
+            Bundle 'groenewege/vim-less'
+            Bundle 'Valloric/YouCompleteMe'
             "Bundle 'sjl/gundo.vim'
             "Bundle 'TaskList.vim'
             Bundle 'taglist.vim'
@@ -31,10 +52,10 @@
             Bundle 'mutewinter/vim-indent-guides'
             Bundle 'reinh/vim-makegreen'
             Bundle 'rosenfeld/conque-term'
-            Bundle 'kien/ctrlp.vim'
             Bundle 'scrooloose/syntastic'
             Bundle 'kana/vim-smartinput'
             Bundle 'sjl/clam.vim'
+            Bundle 'tpope/vim-surround'
         " General Vim end
     
         " Web (generic)
@@ -42,7 +63,7 @@
             Bundle 'HTML-AutoCloseTag'
             Bundle 'juvenn/mustache.vim'
             Bundle 'groenewege/vim-less'
-            Bundle 'Rykka/ColorV'
+          "  Bundle 'Rykka/ColorV'
             Bundle 'gregsexton/MatchTag'
             Bundle 'wavded/vim-stylus'
             Bundle 'JavaScript-Indent'
@@ -56,7 +77,7 @@
             Bundle 'digitaltoad/vim-jade'
             Bundle 'leshill/vim-json'
             Bundle 'kchmck/vim-coffee-script'
-     "       Bundle 'manalang/jshint.vim'
+            Bundle 'walm/jshint.vim'
             Bundle 'mmalecki/vim-node.js'
             Bundle 'lambdalisue/nodeunit.vim'
         " Javascript / node /coffeescript end
@@ -125,6 +146,9 @@
     set history=1000
     set undolevels=1000
 
+    " keep cache of ctrlp
+    let g:ctrlp_clear_cache_on_exit = 0
+
     " Setup persistently store the undo folder
     if ! isdirectory(expand('~/.vimundo'))
       call mkdir(expand('~/.vimundo'))
@@ -156,6 +180,7 @@
 
 " Keymaps
     map <silent> ,r :silent NERDTreeToggle <CR>
+    nmap <silent> ,t :silent TagbarToggle<CR>
    " map <silent> ,r :call g:ToogleNERDTreeLikeAChamp() <CR>
     map <silent> <S-F2> <ESC>:NERDTreeToggle <RETURN><CR>
     map <silent> <F3> <ESC>:CommandT<RETURN>
@@ -172,6 +197,10 @@
     "inoremap <right> <nop>
     map <F1> <Esc>
     imap <F1> <Esc>
+
+"    let g:tagbar_type_javascript = { 'ctagsbin' : '/usr/local/lib/jsctags' }
+"    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+
 " Keymaps end
 
 " Filetype overrides
@@ -243,19 +272,29 @@
     nnoremap <C-j> <C-w>j
     nnoremap <C-k> <C-w>k
     nnoremap <C-l> <C-w>l
+    
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_cmd = 'CtrlP'
+
+    set tags=tags;/
+
+    let g:neocomplcache_enable_at_startup = 1
 
 " Vim Plugin Configs end
 
 " Custom functions FTW
-    function! g:ToogleNERDTreeLikeAChamp()
-        "Opens NERDTree if closed, focus on NERDTree if open
-        "and focus on a file or (FINALLY) close when focused on the NERDTree
-        if exists("t:NERDTreeBufName")
-            if (bufwinnr(t:NERDTreeBufName) != -1)
-                :wincmd w
-                return
-            endif
-        endif
-        :NERDTreeToggle
-    endfunction
+  function! g:ToogleNERDTreeLikeAChamp()
+      "Opens NERDTree if closed, focus on NERDTree if open
+      "and focus on a file or (FINALLY) close when focused on the NERDTree
+      if exists("t:NERDTreeBufName")
+          if (bufwinnr(t:NERDTreeBufName) != -1)
+              :wincmd w
+              return
+          endif
+      endif
+      :NERDTreeToggle
+  endfunction
+
+  function! FormatJSON() :%!python -m json.tool endfunction
+
 " Custom functions FTW end
